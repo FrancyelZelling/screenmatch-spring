@@ -1,6 +1,8 @@
 package com.zelling.screenmatch;
 
+import com.zelling.screenmatch.model.DadosSerie;
 import com.zelling.screenmatch.service.ConsumoApi;
+import com.zelling.screenmatch.service.ConverteDados;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +17,10 @@ public class ScreenmatchApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		var api = new ConsumoApi();
-		var json = api.obterDados("http://www.omdbapi.com/?t=gilmore+girls&Season=1&apikey=e4e7f21a");
+		var json = api.obterDados("http://www.omdbapi.com/?t=gilmore+girls&apikey=e4e7f21a");
 		System.out.println(json);
+		var conversor = new ConverteDados();
+		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
+		System.out.println(dados);
 	}
 }
