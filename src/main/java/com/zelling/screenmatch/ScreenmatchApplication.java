@@ -1,5 +1,6 @@
 package com.zelling.screenmatch;
 
+import com.zelling.screenmatch.model.DadosEpisodio;
 import com.zelling.screenmatch.model.DadosSerie;
 import com.zelling.screenmatch.service.ConsumoApi;
 import com.zelling.screenmatch.service.ConverteDados;
@@ -22,5 +23,8 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		var conversor = new ConverteDados();
 		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
 		System.out.println(dados);
+		json = api.obterDados("http://www.omdbapi.com/?t=gilmore+girls&Season=1&Episode=2&apikey=e4e7f21a");
+		DadosEpisodio dadosEps = conversor.obterDados(json, DadosEpisodio.class);
+		System.out.println(dadosEps);
 	}
 }
